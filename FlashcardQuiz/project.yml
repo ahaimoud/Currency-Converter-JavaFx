@@ -1,0 +1,28 @@
+# XcodeGen spec — run `brew install xcodegen && xcodegen generate` in this folder
+# to produce FlashcardQuiz.xcodeproj (with the CoreXLSX package already wired up).
+name: FlashcardQuiz
+options:
+  bundleIdPrefix: com.example
+  deploymentTarget:
+    iOS: "16.0"
+packages:
+  CoreXLSX:
+    url: https://github.com/CoreOffice/CoreXLSX
+    from: 0.14.1
+targets:
+  FlashcardQuiz:
+    type: application
+    platform: iOS
+    sources:
+      - FlashcardQuiz
+    dependencies:
+      - package: CoreXLSX
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.example.FlashcardQuiz
+        GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_KEY_UIApplicationSceneManifest_Generation: YES
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+        INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone: "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight"
+        SWIFT_VERSION: "5.9"
+        TARGETED_DEVICE_FAMILY: "1,2"
