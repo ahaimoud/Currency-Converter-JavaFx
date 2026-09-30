@@ -12,7 +12,11 @@ enum XLSXParser {
 
     /// Returns rows of [column A, column B] strings from the first worksheet.
     static func parseRows(from data: Data) throws -> [[String]] {
-        guard let file = XLSXFile(data: data) else {
+        // In current CoreXLSX versions this initializer throws (it isn't failable).
+        let file: XLSXFile
+        do {
+            file = try XLSXFile(data: data)
+        } catch {
             throw ImportError.unreadable
         }
 
